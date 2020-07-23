@@ -1,4 +1,8 @@
-# Doz's private userbot
+"""
+Credits (Github)
+SirDoz: Developer of DozBot.
+coats1337: Alucard commands.
+"""
 # --------------------------------------------------------------------------
 # Modules
 import discord, chalk, json, asyncio, random, json, requests, pyfiglet, pymongo, datetime, re, string
@@ -39,10 +43,9 @@ py_ver = python_version()
 dispy_ver = discord.__version__
 # ---------------------------------------------------------------------------
 # Webhooks (REQUIRED: I'm too lazy to make this bot work without logging.)
-dozbot_logs_webhook = Webhook.partial(731292598790258739, "Irl2hlmNaWihL_2ooygmcfreO1njUQDvnW5cT1wT_0IJC34916C2udZYzNgwDoxAJr98",\
+# HINT: https://discordapp.com/api/webhooks/int/random_char
+dozbot_logs_webhook = Webhook.partial(int, "random_char",\
  adapter=RequestsWebhookAdapter()) #dozbot-logs in HQ
-gbans_webhook = Webhook.partial(707705186344501358, "UoTc3MYb5ecdB4Ab14wPLUeba-Ahxfa9lxKnOluphdzIzGwQUJv_yhUFoVvPRRcd-5Nj",\
- adapter=RequestsWebhookAdapter()) #gban-logs in HQ
 # ---------------------------------------------------------------------------
 # Boot
 reaper_start_text = pyfiglet.figlet_format("DOZBOT")
