@@ -1,0 +1,6 @@
+discord.py[voice]>=1.3.4
+pychalk
+requests
+pyfiglet
+pymongo
+dnspython
