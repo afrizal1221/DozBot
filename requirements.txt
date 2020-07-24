@@ -4,3 +4,4 @@ requests
 pyfiglet
 pymongo
 dnspython
+googletrans

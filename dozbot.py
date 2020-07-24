@@ -14,6 +14,7 @@ from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from os import remove
 from platform import python_version
+from googletrans import Translator
 # ---------------------------------------------------------------------------
 with open('config.json') as a:
     config = json.load(a)
@@ -43,8 +44,8 @@ py_ver = python_version()
 dispy_ver = discord.__version__
 # ---------------------------------------------------------------------------
 # Webhooks (REQUIRED: I'm too lazy to make this bot work without logging.)
-# HINT: https://discordapp.com/api/webhooks/int/random_char
-dozbot_logs_webhook = Webhook.partial(int, "random_char",\
+# HINT: https://discordapp.com/api/webhooks/int/random_chars
+dozbot_logs_webhook = Webhook.partial(int, "random_chars",\
  adapter=RequestsWebhookAdapter()) #dozbot-logs in HQ
 # ---------------------------------------------------------------------------
 # Boot
@@ -348,6 +349,41 @@ try:
         else:
             await ctx.send(f'Fuck off {ctx.author.mention}!')
 
+    # This is a very basic implementation of the command.
+    @commands.check(SELF_BOT_CHECK)
+    @dozbot.command(aliases=['trans', 'tl'])
+    async def translate(ctx, *, txt=None):
+        """Translate a language to English."""
+
+        try:
+            await ctx.message.delete()
+        except:
+            pass
+
+        if txt == None:
+            txtnon = await ctx.send("``USAGE: tl <text>``")
+            await asyncio.sleep(2)
+            try:
+                return await txtnon.delete()
+            except:
+                return
+
+        translator = Translator()
+        translation = translator.translate(txt, dest='en')
+        lang = translator.detect(txt)
+
+        em = discord.Embed(title='Translator', colour=discord.Colour.green())
+        em.add_field(name='Original Text:', value=txt, inline=False)
+        em.add_field(name='Translated Text:', value=translation.text, inline=False)
+        em.set_footer(text=f'Detected Language: {lang.lang}')
+
+        try:
+            return await ctx.send(embed=em)
+        except:
+            print(chalk.yellow("[NOTICE] CMD|TRANSLATE: Couldn't send embed. Using TXT instead."))
+            dozbot_logs_webhook.send("```[NOTICE] CMD|TRANSLATE: Couldn't send embed. Using TXT instead.```")
+            return await ctx.send(f'>>> Original Text:\n{txt}\nTranslated Text:\n{translation.text}\nDetected Language:\n{lang.lang}') 
+
     @commands.check(SELF_BOT_CHECK)
     @has_permissions(manage_messages=True)
     @dozbot.command()
@@ -355,7 +391,12 @@ try:
         """Auto delete someone's messages."""
         
         if txt == None:
-            return await ctx.send("``USAGE: censor <user>``")
+            txtnon = await ctx.send("``USAGE: censor <user>``")
+            await asyncio.sleep(2)
+            try:
+                return await txtnon.delete()
+            except:
+                return
 
         for a in txt:
             if (a.isnumeric()) == True:
@@ -488,7 +529,7 @@ try:
             try:
                 await cctxt.delete()
             except:
-                pass
+                return
 
     @commands.check(SELF_BOT_CHECK)
     @dozbot.command()
@@ -541,9 +582,9 @@ try:
         await asyncio.sleep(10)
 
         try:
-            await infomsg.delete()
+            return await infomsg.delete()
         except:
-            pass
+            return
 
     @commands.check(SELF_BOT_CHECK)
     @dozbot.command(aliases=["banish"])
@@ -875,9 +916,9 @@ try:
                 pass
 
             try:
-                await ctx.message.delete()
+                return await ctx.message.delete()
             except:
-                pass
+                return
 
     # Userinfo avi
     @commands.command(SELF_BOT_CHECK)
@@ -912,9 +953,9 @@ try:
             pass
 
         try:
-            await ctx.message.delete()
+            return await ctx.message.delete()
         except:
-            pass
+            return
 
 except:
     pass
