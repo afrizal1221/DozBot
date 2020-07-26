@@ -54,6 +54,12 @@ print(chalk.green(f"{reaper_start_text}\nUp and ready!"))
 dozbot = commands.Bot(command_prefix=prefix, self_bot=True) # Bot def.
 dozbot.remove_command("help") # Removes default help command.
 # ---------------------------------------------------------------------------
+def RandomColour():
+    """Generates random Colours"""
+
+    randColour = discord.Colour(random.randint(0x000000, 0xFFFFFF))
+    return randColour
+# ---------------------------------------------------------------------------
 # Global Error handlers
 @dozbot.event
 async def on_command_error(ctx, error):
@@ -247,7 +253,7 @@ try:
             giveawaysniper_status = "Couldn't obtain Giveaway Sniper status!"
             pass
 
-        em = discord.Embed(description='Bot is running!', colour=discord.Colour.green())
+        em = discord.Embed(description='Bot is running!', colour=RandomColour())
         em.add_field(name='Database Status:', value=db_status, inline=False)
         em.add_field(name='Nitro Sniper:', value=nitrosniper_status, inline=False)
         em.add_field(name='Giveaway Sniper:', value=giveawaysniper_status, inline=False)
@@ -372,7 +378,7 @@ try:
         translation = translator.translate(txt, dest='en')
         lang = translator.detect(txt)
 
-        em = discord.Embed(title='Translator', colour=discord.Colour.green())
+        em = discord.Embed(title='Translator', colour=RandomColour())
         em.add_field(name='Original Text:', value=txt, inline=False)
         em.add_field(name='Translated Text:', value=translation.text, inline=False)
         em.set_footer(text=f'Detected Language: {lang.lang}')
@@ -892,7 +898,7 @@ try:
                 if role == "@everyone":
                     role = "N/A"
                 voice_state = "Not in any VC" if not user.voice else user.voice.channel
-            em = discord.Embed(timestamp=ctx.message.created_at, colour=discord.Colour.green())
+            em = discord.Embed(timestamp=ctx.message.created_at, colour=RandomColour())
             em.add_field(name='User ID', value=user.id, inline=False)
             if isinstance(user, discord.Member):
                 em.add_field(name='Nick', value=user.nick, inline=False)
@@ -942,7 +948,7 @@ try:
             user = ctx.message.author
 
         avi = user.avatar_url_as(static_format='png')
-        em = discord.Embed(colour=discord.Colour.green())
+        em = discord.Embed(colour=RandomColour())
         em.set_image(url=avi)
 
         try:
