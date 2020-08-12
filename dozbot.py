@@ -40,7 +40,7 @@ BOT_OWNER_ID = int(config.get("bot_owner_id"))
 DOZ_DISCORD = 'Doz#2512' # Please don't change this! Give me credit.
 DOZ_SUPPORT = 'https://discord.com/invite/KryvXVz' # Support server link.
 TERM_CMDS = config.get("term") # If set to true then term, sysinfo and restart commands will be enabled (OPTIONS: true, false).
-bot_ver = 'V1.2'
+bot_ver = 'V1.2B'
 py_ver = python_version()
 dispy_ver = discord.__version__
 # ---------------------------------------------------------------------------
