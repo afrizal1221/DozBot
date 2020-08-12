@@ -38,6 +38,7 @@ password = config.get("password") # Your account password (required for use of c
 BAN_GIF = config.get("ban_gif") # Animated gif in ban message.
 BOT_OWNER_ID = int(config.get("bot_owner_id"))
 DOZ_DISCORD = 'Doz#2512' # Please don't change this! Give me credit.
+DOZ_SUPPORT = 'https://discord.com/invite/KryvXVz' # Support server link.
 TERM_CMDS = config.get("term") # If set to true then term, sysinfo and restart commands will be enabled (OPTIONS: true, false).
 bot_ver = 'V1.2'
 py_ver = python_version()
@@ -213,6 +214,13 @@ try:
         """Link to help page"""
         
         await ctx.send('https://sirdoz.github.io/dozbot_help/')
+
+    @commands.check(SELF_BOT_CHECK)
+    @dozbot.command()
+    async def support(ctx):
+        """Link to support server"""
+
+        await ctx.send(DOZ_SUPPORT)
 
     @commands.check(SELF_BOT_CHECK)
     @dozbot.command()
