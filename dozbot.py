@@ -39,7 +39,7 @@ BAN_GIF = config.get("ban_gif") # Animated gif in ban message.
 BOT_OWNER_ID = int(config.get("bot_owner_id"))
 DOZ_DISCORD = 'Doz#2512' # Please don't change this! Give me credit.
 TERM_CMDS = config.get("term") # If set to true then term, sysinfo and restart commands will be enabled (OPTIONS: true, false).
-bot_ver = 'V1.1'
+bot_ver = 'V1.2'
 py_ver = python_version()
 dispy_ver = discord.__version__
 # ---------------------------------------------------------------------------
@@ -308,9 +308,14 @@ try:
                 result = str(stdout.decode().strip()) \
                     + str(stderr.decode().strip())
 
-                await ctx.send(f"```bash\n{result}```")
+                await ctx.send("```" + result + "```")
             except FileNotFoundError:
-                await ctx.send("``The neofetch binary is missing!``")
+                await ctx.send("``The neofetch binary is missing!\nAttempting to download binary with wget...``")
+                try:
+                	await asyncrunapp("wget", "https://raw.githubusercontent.com/dylanaraps/neofetch/master/neofetch")
+                	await ctx.send("Successfully downloaded neofetch binary!\nNow run ``term chmod +x neofetch`` or else you will get permission denied error!") # For whatever reason, using create_subprocess_shell('chmod +x neofetch') does nothing so you will have to use the term command for such thing.
+                except:
+                	await ctx.send("Failed to download neofetch binary!")
 
         else:
             await ctx.send("```Term commands are disabled! Please enable in config!```")
