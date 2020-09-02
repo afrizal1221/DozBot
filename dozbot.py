@@ -243,7 +243,6 @@ try:
             cluster.server_info()
         except:
             db_status = 'Something is wrong with the database!'
-            pass
 
         user_query = {"_id": ctx.author.id}
 
@@ -252,14 +251,12 @@ try:
                 nitrosniper_status = 'True'
         except:
             nitrosniper_status = "Couldn't obtain Nitro Sniper status!"
-            pass
 
         try:
             if (giveawaysniper_flag.count_documents(user_query) == 1):
                 giveawaysniper_status = 'True'
         except:
             giveawaysniper_status = "Couldn't obtain Giveaway Sniper status!"
-            pass
 
         em = discord.Embed(description='Bot is running!', colour=RandomColour())
         em.add_field(name='Database Status:', value=db_status, inline=False)
@@ -276,7 +273,6 @@ try:
             print(chalk.yellow("[NOTICE] CMD|ALIVE: Couldn't send embed. Using TXT instead."))
             dozbot_logs_webhook.send("```[NOTICE] CMD|ALIVE: Couldn't send embed. Using TXT instead.```")
             await ctx.send(f'>>> Database Status: {db_status}\nNitro Sniper: ``{nitrosniper_status}``\nGiveaway Sniper: {giveawaysniper_status}\nPing: ``{ping}ms``')
-            pass
 
     @commands.check(SELF_BOT_CHECK)
     @dozbot.command()
@@ -596,7 +592,6 @@ try:
             infomsg = await ctx.send(embed=embed)
         except:
             infomsg = await ctx.send(f'Cleared {amount} messages.\nReason: {reason}')
-            pass
 
         await asyncio.sleep(10)
 
@@ -640,7 +635,6 @@ try:
         except:
             print(chalk.yellow(f"[NOTICE] CMD|BAN: Couldn't DM reason to {user}."))
             dozbot_logs_webhook.send(f"```[NOTICE] CMD|BAN: Couldn't DM reason to {user}.```")
-            pass
 
         try: # Tries to ban user
             await ctx.guild.ban(user, reason=reason)
@@ -682,7 +676,6 @@ try:
         except:
             print(chalk.yellow(f"[NOTICE] CMD|KICK: Couldn't DM reason to {user}."))
             dozbot_logs_webhook.send(f"```[NOTICE] CMD|KICK: Couldn't DM reason to {user}.```")
-            pass
 
         try: # tries to kick user
             await ctx.guild.kick(user, reason=reason)
@@ -782,7 +775,6 @@ try:
                 await guild.ack()
             except:
                 print(chalk.yellow(f"[NOTICE] CMD|READ: Couldn't mark {guild.name} as read."))
-                pass
 
     @commands.check(SELF_BOT_CHECK)
     @dozbot.command(aliases=['geolocate', 'iptogeo', 'iptolocation', 'ip2geo', 'ip'])
@@ -932,7 +924,6 @@ try:
             except:
                 print(chalk.yellow("[NOTICE] CMD|USERINFO: Couldn't send embed."))
                 dozbot_logs_webhook.send("```[NOTICE] CMD|USERINFO: Couldn't send embed.```")
-                pass
 
             try:
                 return await ctx.message.delete()
@@ -969,7 +960,6 @@ try:
         except:
             print(chalk.yellow("[NOTICE] CMD|PFP: Couldn't send embed."))
             dozbot_logs_webhook.send("```[NOTICE] CMD|PFP: Couldn't send embed.```")
-            pass
 
         try:
             return await ctx.message.delete()

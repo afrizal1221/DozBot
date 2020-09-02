@@ -1,7 +1,7 @@
-discord.py[voice]>1.3.4
-pychalk>0
-requests>0
-pyfiglet>0
-pymongo>0
-dnspython>0
-googletrans>0
+discord.py[voice]
+pychalk
+requests
+pyfiglet
+pymongo
+dnspython
+googletrans
